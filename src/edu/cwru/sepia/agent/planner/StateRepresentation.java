@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import edu.cwru.sepia.agent.planner.actions.CompoundMoveAction;
 import edu.cwru.sepia.agent.planner.actions.ResourceDepositAction;
@@ -236,8 +237,17 @@ public class StateRepresentation {
      */
     @Override
     public int hashCode() {
-        // TODO: Implement me!
-        return 0;
+        int hash = 7; // A prime number used as a starting point
+        hash = 31 * hash + this.playerNum;
+        hash = 31 * hash + this.collectedGold;
+        hash = 31 * hash + this.collectedWood;
+        hash = 31 * hash + this.requiredGold;
+        hash = 31 * hash + this.requiredWood;
+        hash = 31 * hash + (this.buildPeasants ? 1 : 0);
+        hash = 31 * hash + Objects.hash(this.peasants);
+        hash = 31 * hash + Objects.hash(this.resources);
+        hash = 31 * hash + (this.townHall == null ? 0 : this.townHall.hashCode());
+        return hash;
     }
 
 }
